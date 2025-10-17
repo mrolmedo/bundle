@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql100
   labels:
-    app: mysql
+    apps: mysql100
 spec:
   ports:
     - port: 3306
   selector:
-    app: mysql
+    apps: mysql100
   clusterIP: None
 ---
 apiVersion: v1
@@ -27,20 +27,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysql100
   labels:
-    app: mysql
+    apps: mysql100
   namespace: mysqlh100
 spec:
   selector:
     matchLabels:
-      app: mysql # has to match .spec.template.metadata.labels
+      apps: mysql100 # has to match .spec.template.metadata.labels
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        apps: mysql100
     spec:
       restartPolicy: Always
       containers:

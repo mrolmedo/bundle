@@ -1,13 +1,15 @@
+defaultNamespace: mysql72
 labels:
-  apps: mysql
+  apps: mysql72
 dependsOn:
+
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
   # Example:
   #
-  #      GitRepo name "one", Bundle path "/multi-cluster/hello-world"
-  #      results in "one-multi-cluster-hello-world".
+  #      GitRepo name "mysql72", Bundle path "/multi-cluster/hello-world"
+  #      results in "mysql72-multi-cluster-hello-world".
   #
   # Note:
   #

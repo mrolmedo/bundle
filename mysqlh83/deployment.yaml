@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: mysql
   labels:
-    app: mysql
+    apps: mysql83
 spec:
   ports:
     - port: 3306
   selector:
-    app: mysql
+    apps: mysql83
   clusterIP: None
 ---
 apiVersion: v1
@@ -29,18 +29,18 @@ kind: Deployment
 metadata:
   name: mysql
   labels:
-    app: mysql
+    apps: mysql83
   namespace: mysqlh83
 spec:
   selector:
     matchLabels:
-      app: mysql # has to match .spec.template.metadata.labels
+      apps: mysql83 # has to match .spec.template.metadata.labels
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        apps: mysql83
     spec:
       restartPolicy: Always
       containers:
