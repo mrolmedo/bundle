@@ -1,4 +1,6 @@
 defaultNamespace: one
+labels:
+  apps: mysql
 dependsOn:
 
   # Format:

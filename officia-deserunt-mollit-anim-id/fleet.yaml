@@ -1,4 +1,6 @@
 defaultNamespace: officia-deserunt-mollit-anim-id
+labels:
+  apps: officia
 dependsOn:
 
   # Format:
@@ -20,4 +22,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        app: mysql
+        apps: mysql100

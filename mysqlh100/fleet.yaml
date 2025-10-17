@@ -1,6 +1,7 @@
-dependsOn:
+defaultNamespace: mysql100
 labels:
-        app: mysql
+  apps: mysql100
+dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #

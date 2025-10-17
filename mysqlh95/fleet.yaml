@@ -1,6 +1,6 @@
-dependsOn:
 labels:
-        app: mysql
+  apps: mysql
+dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
