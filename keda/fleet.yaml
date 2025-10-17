@@ -1,6 +1,8 @@
 defaultNamespace: keda
 dependsOn:
-  apps: kubecost
+  - selector:
+      matchLabels:
+        app: monitoring
 helm:
   chart: keda
   repo: https://kedacore.github.io/charts
