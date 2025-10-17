@@ -1,6 +1,6 @@
 labels:
   app: mysql
-#dependsOn:
+dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
@@ -18,6 +18,6 @@ labels:
   #     opni-fleet-examples-fleets-opni-ui-plugin-opera-021f7
 
   # Select bundles to depend on based on their label.
-  #- selector:
-  #    matchLabels:
-  #      app: longhorn
+   - selector:
+       matchLabels:
+         app: longhorn
