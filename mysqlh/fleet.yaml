@@ -1,5 +1,5 @@
 labels:
-  apps: mysql
+  app: mysql
 dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
