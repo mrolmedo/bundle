@@ -1,0 +1,10 @@
+defaultNamespace: kubecost
+labels:
+  apps: kubecost
+depensOn:
+  apps: monitoring
+helm:
+  chart: kubecost
+  repo: https://kubecost.github.io/kubecost	
+  releaseName: kubecost
+  version: 3.0.0
