@@ -1,7 +1,7 @@
 defaultNamespace: kubecost
 labels:
   apps: kubecost
-depensOn:
+depensdOn:
   apps: monitoring
 helm:
   chart: kubecost
