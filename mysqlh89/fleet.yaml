@@ -1,4 +1,4 @@
-defaultNamespace: mysql89
+defaultNamespace: mysqlh89
 labels:
   apps: mysql89
 dependsOn:

@@ -1,4 +1,4 @@
-defaultNamespace: mysql2
+defaultNamespace: mysqlh2
 labels:
   apps: mysql2
 dependsOn:

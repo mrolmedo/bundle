@@ -1,4 +1,4 @@
-defaultNamespace: mysql10
+defaultNamespace: mysqlh10
 labels:
   apps: mysql10
 dependsOn:

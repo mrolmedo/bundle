@@ -1,4 +1,4 @@
-defaultNamespace: mysql20
+defaultNamespace: mysqlh20
 labels:
   apps: mysql20
 dependsOn:

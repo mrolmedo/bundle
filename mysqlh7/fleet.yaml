@@ -1,4 +1,4 @@
-defaultNamespace: mysql7
+defaultNamespace: mysqlh7
 labels:
   apps: mysql7
 dependsOn:

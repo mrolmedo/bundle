@@ -1,4 +1,4 @@
-defaultNamespace: mysql11
+defaultNamespace: mysqlh11
 labels:
   apps: mysql11
 dependsOn:

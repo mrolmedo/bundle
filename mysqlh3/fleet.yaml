@@ -1,4 +1,4 @@
-defaultNamespace: mysql3
+defaultNamespace: mysqlh3
 labels:
   apps: mysql3
 dependsOn:
