@@ -1,10 +1,12 @@
 defaultNamespace: keda
-dependsOn:
-  - selector:
-      matchLabels:
-        apps: monitoring
+
 helm:
   chart: keda
   repo: https://kedacore.github.io/charts
   releaseName: keda
   version: 2.15.0
+
+dependsOn:
+  - selector:
+      matchLabels:
+        apps: monitoring
