@@ -1,5 +1,6 @@
 defaultNamespace: keda
-
+labels:
+  apps: keda
 helm:
   chart: keda
   repo: https://kedacore.github.io/charts
