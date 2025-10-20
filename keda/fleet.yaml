@@ -9,4 +9,4 @@ helm:
 dependsOn:
   - selector:
       matchLabels:
-        apps: monitoring
+        apps: kubecost
