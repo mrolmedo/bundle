@@ -1,17 +1,13 @@
 defaultNamespace: kubecost
 labels:
   apps: kubecost
-<<<<<<< HEAD
-dependsOn:
-  - selector:
-      matchLabels:
-        apps: monitoring
-=======
-depensdOn:
-  apps: monitoring
->>>>>>> eb2ca6498856ba547317d533a903cab845a6de22
+
 helm:
   chart: kubecost
   repo: https://kubecost.github.io/kubecost	
   releaseName: kubecost
   version: 3.0.0
+dependsOn:
+  - selector:
+      matchLabels:
+        apps: monitoring
