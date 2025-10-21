@@ -1,4 +1,6 @@
 defaultNamespace: lorem-ipsum-dolor-sit-amet
+labels:
+  apps: loremipsum
 dependsOn:
 
   # Format:
