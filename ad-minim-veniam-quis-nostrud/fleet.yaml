@@ -22,4 +22,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        app: loremipsum
+        apps: loremipsum
