@@ -3,9 +3,9 @@ labels:
   app: spark
 helm:
   chart: spark-operator
-  repo: https://googlecloudplatform.github.io/spark-on-k8s-operator
+  repo:  https://kubeflow.github.io/spark-operator
   releaseName: spark-operator
-  version: 3.2.0
+  version: 2.3.0
 dependsOn:
 
   # Format:
