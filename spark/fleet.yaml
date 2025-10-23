@@ -1,6 +1,6 @@
 defaultNamespace: spark-operator
 labels:
-  app: spark
+  apps: spark
 helm:
   chart: spark-operator
   repo: https://googlecloudplatform.github.io/spark-on-k8s-operator
