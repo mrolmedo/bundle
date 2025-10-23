@@ -7,7 +7,7 @@ helm:
   releaseName: keda
   version: 2.15.0
 
-dependsOn:
-  - selector:
-      matchLabels:
-        apps: kubecost
+#dependsOn:
+#  - selector:
+#      matchLabels:
+#        apps: kubecost
