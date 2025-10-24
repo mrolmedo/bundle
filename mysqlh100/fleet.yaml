@@ -1,6 +1,6 @@
 defaultNamespace: mysqlh100
 labels:
-  apps: mysql100
+  apps: mysqlh100
 dependsOn:
 
   # Format:
