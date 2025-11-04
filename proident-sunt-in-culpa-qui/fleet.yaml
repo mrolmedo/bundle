@@ -20,4 +20,7 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        app: mysql
+        apps: simpleone
+        apps: simpletwo
+        apps: simplethree
+        apps: simplefour
