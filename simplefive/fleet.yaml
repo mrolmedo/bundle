@@ -4,7 +4,7 @@
 # if not specified the chart will be installed to "default"
 namespace: fleet-helm-simpletwo
 labels: 
-  apps: simpletwo
+  apps: simplefive
 
 # Custom helm options
 helm:
