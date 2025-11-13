@@ -6,7 +6,7 @@ metadata:
   annotations:
     # 🎯 The essential annotation: Runs after the main deployment phase
     "helm.sh/hook": post-install, post-upgrade
-     "helm.sh/hook-weight": "11"
+    "helm.sh/hook-weight": "11"
     # Optional: Delete the ClusterRole if the Fleet bundle is uninstalled
     "helm.sh/hook-delete-policy": before-hook-creation
   labels:
