@@ -1,0 +1,7 @@
+# fleet.yaml
+defaultNamespace: nginx-hook-test
+# Target a specific cluster group if desired (optional)
+# targets:
+# - clusterSelector:
+#     matchLabels:
+#       env: dev
