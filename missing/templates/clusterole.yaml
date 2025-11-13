@@ -6,8 +6,8 @@ metadata:
   annotations:
     # 🎯 The essential annotation: Runs after the main deployment phase
     "helm.sh/resource-policy": "keep"
-    meta.helm.sh/release-name: hooks-missing
-    meta.helm.sh/release-namespace: nginx-hook-test01
+    "meta.helm.sh/release-name": hooks-missing
+    "meta.helm.sh/release-namespace": nginx-hook-test01
   labels:
     app: nginx
     app.kubernetes.io/managed-by: Helm
