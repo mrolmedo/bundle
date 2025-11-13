@@ -1,0 +1,23 @@
+# templates/02_clusterrole-hook.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nginx-viewer-role
+  annotations:
+    # 🎯 The essential annotation: Runs after the main deployment phase
+    "helm.sh/hook": "post-install, post-upgrade"
+     "helm.sh/hook-weight: 11"
+    # Optional: Delete the ClusterRole if the Fleet bundle is uninstalled
+    "helm.sh/hook-delete-policy": "before-hook-creation"
+  labels:
+    app: nginx
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
