@@ -5,12 +5,12 @@ metadata:
   name: nginx-viewer-role
   annotations:
     # 🎯 The essential annotation: Runs after the main deployment phase
-    "helm.sh/hook": post-install, post-upgrade
-    "helm.sh/hook-weight": "11"
-    # Optional: Delete the ClusterRole if the Fleet bundle is uninstalled
-    "helm.sh/hook-delete-policy": before-hook-creation
+    "helm.sh/resource-policy": "keep"
+    meta.helm.sh/release-name: hooks-missing
+    meta.helm.sh/release-namespace: nginx-hook-test01
   labels:
     app: nginx
+    app.kubernetes.io/managed-by: Helm
 rules:
 - apiGroups: [""]
   resources: ["pods", "services"]
