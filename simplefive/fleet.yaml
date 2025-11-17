@@ -53,4 +53,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        apps: simpleone
+        apps: simplefour

@@ -20,7 +20,5 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        apps: simpleone
-        apps: simpletwo
-        apps: simplethree
-        apps: simplefour
+        name: rabitt-cluster
+        name: rabbit-operator
