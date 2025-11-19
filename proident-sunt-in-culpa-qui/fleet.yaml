@@ -20,5 +20,5 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        name: rabitt-cluster
-        name: rabbit-operator
+        name: rabittmq-cluster
+        name: rabbitmq-operator
