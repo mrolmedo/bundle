@@ -2,9 +2,9 @@
 
 # The namespace this chart will be installed and restricted to,
 # if not specified the chart will be installed to "default"
-namespace: fleet-helm-simpletwo
+namespace: fleet-helm-simplesix
 labels: 
-  apps: simpletwo
+  apps: simpletsix
 
 # Custom helm options
 helm:
