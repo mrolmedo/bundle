@@ -33,7 +33,7 @@ helm:
   values:
     replicas: 1
 dependsOn:
-  - name: rabbitmq-cluster
+  - name: rabbitmq-cert
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
