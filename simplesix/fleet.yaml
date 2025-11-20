@@ -4,7 +4,7 @@
 # if not specified the chart will be installed to "default"
 namespace: fleet-helm-simplesix
 labels: 
-  apps: simpletsix
+  apps: simplesix
 
 # Custom helm options
 helm:
@@ -56,4 +56,4 @@ dependsOn:
         apps: simplefive
   - selector: 
       matchLabels: 
-        apps: simplefour
+        apps: simplethree
