@@ -1,0 +1,142 @@
+# webservice-stack.yaml
+# --- 1. NAMESPACE (NS) ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webservice-ns
+  labels:
+    app: stateful-web
+
+---
+# --- 2. SERVICE ACCOUNT (SA) ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: webservice-sa
+  namespace: webservice-ns
+
+---
+# --- 3. CLUSTERROLE (CR) ---
+# Defines cluster-wide read permissions (e.g., for monitoring/logging)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: webservice-pod-reader-cr
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log"]
+  verbs: ["get", "watch", "list"]
+
+---
+# --- 4. CLUSTERROLEBINDING (CRB) ---
+# Links the ClusterRole to the ServiceAccount in the specific Namespace
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: webservice-pod-reader-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: webservice-pod-reader-cr
+subjects:
+- kind: ServiceAccount
+  name: webservice-sa
+  namespace: webservice-ns # Subject is namespaced
+
+---
+# --- 5. ROLE (Namespaced) ---
+# Defines permissions within the 'webservice-ns' (e.g., ability to read its own config)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: webservice-config-reader-role
+  namespace: webservice-ns
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "secrets"]
+  verbs: ["get", "watch", "list"]
+
+---
+# --- 6. ROLEBINDING (RB) ---
+# Links the Role to the ServiceAccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: webservice-config-reader-rb
+  namespace: webservice-ns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: webservice-config-reader-role
+subjects:
+- kind: ServiceAccount
+  name: webservice-sa
+  namespace: webservice-ns
+
+---
+# --- 7. SERVICE (SVC) ---
+# Exposes the application internally
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-stateful-app-svc
+  namespace: webservice-ns
+spec:
+  type: ClusterIP
+  ports: [{port: 80, targetPort: 80}]
+  selector: {app: my-stateful-app}
+
+---
+# --- 8. STATEFULSET (Webservice) + PVC ---
+# Handles the webservice deployment and mounts the storage
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-stateful-app
+  namespace: webservice-ns
+spec:
+  serviceName: "my-stateful-app-svc"
+  replicas: 1
+  selector: {matchLabels: {app: my-stateful-app}}
+  template:
+    metadata: {labels: {app: my-stateful-app}}
+    spec:
+      serviceAccountName: webservice-sa
+      containers:
+      - name: webservice-container
+        image: nginx:latest # Use your stateful webservice image
+        ports: [{containerPort: 80}]
+        volumeMounts:
+        - name: app-storage-claim
+          mountPath: /mnt/data # The path inside the container where the PVC is mounted
+  # Defines the PVC that Kubernetes automatically provisions and binds
+  volumeClaimTemplates:
+  - metadata:
+      name: app-storage-claim
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 125Mi # Defines the storage size of the PVC
+
+---
+# --- 9. INGRESS ---
+# Exposes the Service externally
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webservice-ingress
+  namespace: webservice-ns
+  annotations:
+    kubernetes.io/ingress.class: nginx # Adjust if you use a different Ingress controller (e.g., traefik)
+spec:
+  rules:
+  - host: webservice.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-stateful-app-svc
+            port: {number: 80}

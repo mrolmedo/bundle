@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: first040
+  labels:
+    app.kubernetes.io/name: multi-container-project
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-container-app
+  namespace: first040 # Deploying into the 'first040' namespace
+  labels:
+    app: five-in-one
+spec:
+  # The Deployment will try to maintain 2 copies of the pod
+  replicas: 2
+  selector:
+    matchLabels:
+      app: five-in-one
+  template:
+    metadata:
+      labels:
+        app: five-in-one
+    spec:
+      # Define a shared Volume for inter-container communication (e.g., logs, data)
+      volumes:
+      - name: shared-log-data
+        emptyDir: {}
+        
+      # Define all five containers in the 'containers' list
+      containers:
+      
+      # 1. Main Application Container (Webserver)
+      - name: main-app-webserver
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        # The main app writes logs or data to the shared volume
+        volumeMounts:
+        - name: shared-log-data
+          mountPath: /var/log/app # Nginx access logs or application output
+
+      # 2. Log Forwarder Sidecar
+      # Reads logs from the shared volume and sends them to a centralized logging system
+      - name: log-forwarder-sidecar
+        image: fluent/fluentd:latest
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: shared-log-data
+          mountPath: /var/log/input # Reads logs from the mount path of the main app
+
+      # 3. Auth Proxy Sidecar
+      # Handles authentication/authorization or TLS termination before traffic reaches the main app
+      - name: auth-proxy-sidecar
+        image: quay.io/oauth2-proxy/oauth2-proxy:latest
+        ports:
+        - containerPort: 4180 # Exposes the proxy port
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "300m"
+        command: ["/bin/sh", "-c", "echo 'Auth proxy running...' && sleep 3600"] # Example command
+
+      # 4. Configuration Reloader Sidecar
+      # Watches a ConfigMap or Secret and sends a signal to the main app to reload config
+      - name: config-reloader-sidecar
+        image: busybox:stable
+        resources:
+          limits:
+            memory: "10Mi"
+            cpu: "50m"
+        command: ["sh", "-c", "echo 'Configuration watcher running...' && sleep 3600"]
+
+      # 5. Metrics Exporter Sidecar
+      # A dedicated exporter to scrape metrics (e.g., system stats) from the pod
+      - name: metrics-exporter-sidecar
+        image: prom/node-exporter:latest
+        ports:
+        - containerPort: 9100 # Standard Prometheus metrics port
+        resources:
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
