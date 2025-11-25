@@ -18,5 +18,4 @@ dependsOn:
 
   # Select bundles to depend on based on their label.
   - selector:
-      matchLabels:
-        app: longhorn
+      name: dpfirst049
