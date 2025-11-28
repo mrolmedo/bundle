@@ -1,7 +1,7 @@
 dependsOn:
   - selector:
       matchLabels:
-        app: loremipsum
+        apps: loremipsum
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
