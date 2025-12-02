@@ -23,4 +23,4 @@ dependsOn:
         apps: simplefive
   - selector:
       matchLabels:
-        apps: do-eiusmod
+        apps: doeiusmod
