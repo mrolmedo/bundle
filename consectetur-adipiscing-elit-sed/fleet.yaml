@@ -1,4 +1,7 @@
 defaultNamespace: consectetur-adipiscing-elit-sed
+labels: 
+  apps: consectetur
+
 dependsOn:
 
   # Format:
@@ -20,4 +23,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        app: longhorn
+        apps: simplesix
