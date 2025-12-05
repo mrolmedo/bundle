@@ -1,16 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: first050
-  labels:
-    app.kubernetes.io/name: multi-container-project
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: delayed-ready-deployment
-  namespace: first050
   labels:
     app: delayed-ready
 spec:
