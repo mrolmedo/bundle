@@ -1,6 +1,6 @@
 
 labels:
-  apps: dpfirst10
+  apps: dpfirst010
 dependsOn:
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
