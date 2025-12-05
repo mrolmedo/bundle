@@ -1,5 +1,6 @@
 dependsOn:
-
+labels:
+  apps: dpfirst09
   # Format:
   #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
   #
@@ -19,4 +20,4 @@ dependsOn:
   # Select bundles to depend on based on their label.
   - selector:
       matchLabels:
-        app: longhorn
+        app: loremipsum
