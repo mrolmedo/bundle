@@ -1,6 +1,6 @@
 defaultNamespace: dpfirst05
-label:
-   apps: dp05
+labels:
+  apps: dp05
 
 dependsOn:
 
