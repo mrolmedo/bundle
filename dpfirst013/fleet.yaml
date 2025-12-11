@@ -1,9 +1,9 @@
 defaultNamespace: dpfirst013
-label:
+labels:
    apps: dp013
 
 dependsOn:
 
   - selector:
       matchLabels:
-        apps: dp013 
+        apps: dp012 
