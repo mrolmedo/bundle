@@ -1,22 +1,4 @@
-dependsOn:
-  - selector:
-      matchLabels:
-        apps: loremipsum
-  # Format:
-  #     <GITREPO-NAME>-<BUNDLE_PATH> with all path separators replaced by "-"
-  #
-  # Example:
-  #
-  #      GitRepo name "mysql100", Bundle path "/multi-cluster/hello-world"
-  #      results in "mysql100-multi-cluster-hello-world".
-  #
-  # Note:
-  #
-  #   Bundle names are limited to 53 characters long. If longer they will be
-  #   shortened:
-  #
-  #     opni-fleet-examples-fleets-opni-ui-plugin-operator-crd becomes
-  #     opni-fleet-examples-fleets-opni-ui-plugin-opera-021f7
+defaultNamespace: dpfirst0 
+label:
+   apps: dp050
 
-  # Select bundles to depend on based on their label.
-     
