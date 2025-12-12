@@ -6,5 +6,5 @@ dependsOn:
 
   - selector:
       matchLabels:
-        apps: dp050
+        apps: dp014
 ~
