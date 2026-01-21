@@ -3,7 +3,6 @@ labels:
   apps: dp014
 
 dependsOn:
-
   - selector:
       matchLabels:
         apps: dp013 
