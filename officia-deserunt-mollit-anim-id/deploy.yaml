@@ -1,21 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-delay-deployment
   labels:
-    app: nginx
+    app: nginx-delay
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-delay
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-delay
     spec:
+      # --- 1. Init Container for Delay ---
+      initContainers:
+      - name: delay-start
+        image: busybox:1.36 # A lightweight image with 'sleep'
+        command: ['sh', '-c', 'echo "Sleeping for 600 seconds (10 minutes)..."; sleep 600; echo "Delay complete."']
+        # The Pod will be in "Init" phase for 10 minutes (600 seconds).
+        # Readiness probes for the main container will not even be checked during this time.
+      # -----------------------------------
       containers:
       - name: nginx
-        image: nginx:1.14.2
+        image: nginx:latest
         ports:
         - containerPort: 80
+        # Optional: Add a standard readiness probe that will only be checked AFTER the initContainer completes
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5 # A small delay to ensure Nginx is listening
+          periodSeconds: 10
