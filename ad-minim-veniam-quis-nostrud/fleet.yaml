@@ -1,1 +1,5 @@
 defaultNamespace: ad-minim-veniam-quis-nostrud-02 
+dependsOn:
+  - selector:
+      matchLabels:
+        apps: dp050
