@@ -1,68 +1,36 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql100
-  labels:
-    apps: mysql100
-spec:
-  ports:
-    - port: 3306
-  selector:
-    apps: mysql100
-  clusterIP: None
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-  namespace: mysqlh100
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 125Mi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql100
+  name: nginx-delay-deployment
   labels:
-    apps: mysql100
-  namespace: mysqlh100
+    app: nginx-delay
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      apps: mysql100 # has to match .spec.template.metadata.labels
-  strategy:
-    type: Recreate
+      app: nginx-delay
   template:
     metadata:
       labels:
-        apps: mysql100
+        app: nginx-delay
     spec:
-      restartPolicy: Always
+      # --- 1. Init Container for Delay ---
+      initContainers:
+      - name: delay-start
+        image: busybox:1.36 # A lightweight image with 'sleep'
+        command: ['sh', '-c', 'echo "Sleeping for 600 seconds (10 minutes)..."; sleep 600; echo "Delay complete."']
+        # The Pod will be in "Init" phase for 10 minutes (600 seconds).
+        # Readiness probes for the main container will not even be checked during this time.
+      # -----------------------------------
       containers:
-      - image: mysql:5.6
-        name: mysql
-        livenessProbe:
-          exec:
-            command:
-              - ls
-              - /var/lib/mysql/lost+found
-          initialDelaySeconds: 5
-          periodSeconds: 5
+      - name: nginx
+        image: nginx:latest
         ports:
-        - containerPort: 3306
-          name: mysql
-        volumeMounts:
-        - name: mysql-volume
-          mountPath: /var/lib/mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "rancher"
-      volumes:
-      - name: mysql-volume
-        persistentVolumeClaim:
-          claimName: mysql-pvc
+        - containerPort: 80
+        # Optional: Add a standard readiness probe that will only be checked AFTER the initContainer completes
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5 # A small delay to ensure Nginx is listening
+          periodSeconds: 10
