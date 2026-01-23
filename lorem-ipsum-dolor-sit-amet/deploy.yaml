@@ -26,7 +26,7 @@ spec:
             port: 80
           # El contenedor se considera fallido hasta que este tiempo haya transcurrido.
           # 5 minutos = 300 segundos
-          initialDelaySeconds: 300
+          initialDelaySeconds: 600
           # Usamos un alto valor de failureThreshold para evitar el reinicio.
           failureThreshold: 60
           periodSeconds: 5
