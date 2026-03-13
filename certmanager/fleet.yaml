@@ -1,0 +1,12 @@
+defaultNamespace: cert-manager
+
+helm:
+  # 
+  repo: "oci://dp.apps.rancher.io/charts/cert-manager"
+  version: "1.19.4"
+  releaseName: cert-manager
+  takeOwnership: true
+  values:
+    installCRDs: true
+    crds:
+      enabled: true
