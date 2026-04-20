@@ -1,0 +1,18 @@
+defaultNamespace: fleet-local
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: rancher-fleet
+  namespace: fleet-local
+spec:
+  # The URL to your git repo
+  repo: https://github.com/mrolmedo/bundledependency.git
+  # The branch, tag, or commit to watch
+  branch: main
+  
+  # If the repo is private, specify the secret name in fleet-local namespace
+  # clientSecretName: git-auth-secret
+
+  # Tells Fleet which folders to look into for fleet.yaml or manifests
+  paths:
+    - helmchart
