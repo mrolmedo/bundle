@@ -1,4 +1,6 @@
 defaultNamespace: fleet-local
+helm:
+  takeOwnership: true
 apiVersion: fleet.cattle.io/v1alpha1
 kind: GitRepo
 metadata:
@@ -9,10 +11,15 @@ spec:
   repo: https://github.com/mrolmedo/bundledependency.git
   # The branch, tag, or commit to watch
   branch: main
-  
+  targetRestrictions:
+    - clusterGroup: default
+      name: default
+  targets:
+    - clusterGroup: default
+      name: default
+
   # If the repo is private, specify the secret name in fleet-local namespace
   # clientSecretName: git-auth-secret
 
   # Tells Fleet which folders to look into for fleet.yaml or manifests
-  paths:
-    - helmchart
+
