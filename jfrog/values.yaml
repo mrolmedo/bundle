@@ -1,9 +1,6 @@
 # ----- Database Configuration -----
 postgresql:
   enabled: true
-  postgresqlUsername: artifactory
-  postgresqlPassword: StrongDBPass2024
-  postgresqlDatabase: artifactory
   persistence:
     enabled: true
     size: 5Gi
