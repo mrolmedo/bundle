@@ -1,46 +1,58 @@
+# values.yaml
+
 # ----- Database Configuration -----
 postgresql:
   enabled: true
-  persistence:
-    enabled: true
-    size: 5Gi
-    storageClass: "longhorn"
+  primary:
+    persistence:
+      enabled: true
+      size: 5Gi
+      storageClass: "longhorn"
 
-# ----- Artifactory Core Settings -----
+# ----- Artifactory Core Settings (SINGLE MERGED BLOCK) -----
 artifactory:
+  # 1. Database Connection
   database:
     type: postgresql
     driver: org.postgresql.Driver
-    url: "jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/artifactory"
+    url: "jdbc:postgresql://jfrog-jcr-deployment-postgresql:5432/artifactory"
     username: artifactory
     password: StrongDBPass2024
 
-  # Resource allocation
+  # 2. Resource allocation
   resources:
     requests:
       memory: "2Gi"
       cpu: "1"
     limits:
-      memory: "2Gi"
-      cpu: "1"
+      memory: "4Gi" # Bumped to 4Gi to prevent OOM kills
+      cpu: "2"
 
-  # Java options for the JVM
+  # 3. Java options
   javaOpts:
     xms: "1g"
-    xmx: "2g"
+    xmx: "3g"
 
-  # Persistent storage for artifacts
+  # 4. Persistent storage (Use Longhorn!)
   persistence:
     enabled: true
-    size: 5Gi
-    storageClass: "standard"
+    size: 20Gi # Set to your preferred 20Gi
+    storageClass: "longhorn" 
     type: file-system
+
+  # 5. Disable built-in Nginx (This stays now!)
+  nginx:
+    enabled: false
+
+  # 6. Service Configuration
+  service:
+    type: ClusterIP
 
 # ----- Ingress Configuration -----
 ingress:
   enabled: true
-  defaultBackend:
-    enabled: false
+  routerPath: /
+  artifactoryPath: /artifactory/
   hosts:
     - jfrogmolmedo.support.rancher.space
   annotations:
@@ -48,23 +60,14 @@ ingress:
     cert-manager.io/issuer: jfrog-issuer
     cert-manager.io/issuer-kind: Issuer
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    # Header required when bypassing internal Nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-JFrog-Override-Base-Url $http_x_forwarded_proto://$host;
   tls:
     - secretName: artifactory-tls
       hosts:
         - jfrogmolmedo.support.rancher.space
 
-# ----- Disable built-in Nginx (using Ingress instead) -----
-artifactory:
-  nginx:
-    enabled: false
-
-# ----- Service Configuration -----
-artifactory:
-  service:
-    type: ClusterIP
-# --------------------------
+# ----- Global Settings -----
 jfconnect:
   enabled: false
-
