@@ -52,7 +52,7 @@ helm:
 
     # Ingress and Cert-Manager (using your custom issuer)
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: nginx
       annotations:
         cert-manager.io/issuer: jfrog-issuer
