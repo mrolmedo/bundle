@@ -27,17 +27,17 @@ helm:
       externalPort: 443
       externalProtocol: https
       copyNGINXConfig: false
-
+      postgresql:
+        enabled: true
+        primary:
+          persistence:
+            enabled: true
+            storageClass: "longhorn" # Forces the use of Longhorn
+            size: 2Gi
     jfconnect:
       enabled: false
 
-    postgresql:
-      enabled: true
-      primary:
-        persistence:
-          enabled: true
-          storageClass: "longhorn" # Forces the use of Longhorn
-          size: 2Gi
+    
     ingress:
       enabled: true
       ingressClassName: nginx
