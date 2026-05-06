@@ -1,7 +1,11 @@
 # fleet.yaml
-bundleDefinition:
+  defaultNamespace: jfrog-system
   name: jfrog-jcr-deployment
   namespace: jfrog-system
+  dependsON:
+    - selector:
+        matchLabels:
+          app: longhorn
 
 # Part 1: Create the JFrog-specific Issuer
 definitions:
@@ -60,7 +64,4 @@ helm:
         - secretName: jfrog-jcr-tls-cert
           hosts:
             - jfrogmolmedo.support.rancher.space
-  dependsON:
-    -  selector:
-       matchLabels:
-        app: longhorn
+ 
