@@ -30,7 +30,9 @@ helm:
         repository: releases-docker.jfrog.io/jfrog/artifactory-jcr
         tag: latest
       nginx:
-        enabled: false
+        enabled: true
+        service:
+          type: ClusterIP
       # Bitnami PostgreSQL sub-chart overrides
       postgresql:
        enabled: true
