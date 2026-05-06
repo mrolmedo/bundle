@@ -29,7 +29,8 @@ helm:
       image:
         repository: releases-docker.jfrog.io/jfrog/artifactory-jcr
         tag: latest
-      
+      nginx:
+        enabled: false
       # Bitnami PostgreSQL sub-chart overrides
       postgresql:
        enabled: true
@@ -52,7 +53,7 @@ helm:
 
     # Ingress and Cert-Manager (using your custom issuer)
     ingress:
-      enabled: false
+      enabled: true
       ingressClassName: nginx
       annotations:
         cert-manager.io/issuer: jfrog-issuer
