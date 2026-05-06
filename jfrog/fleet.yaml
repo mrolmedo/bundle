@@ -27,13 +27,15 @@ helm:
         tag: latest
       
       # Bitnami PostgreSQL sub-chart overrides
-      postgresql:
-        enabled: true
-        primary:
-          persistence:
-            enabled: true
-            storageClass: "longhorn"
-            size: 2Gi # Overrides the Bitnami/JFrog default
+     postgresql:
+      enabled: true
+      persistence:
+        size: 5Gi
+      primary:
+        persistence:
+          enabled: true
+          storageClass: "longhorn"
+          size: 5Gi
 
       # Networking
       externalPort: 443
