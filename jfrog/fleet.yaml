@@ -33,10 +33,11 @@ helm:
 
     postgresql:
       enabled: true
-      persistence:
-        enabled: true
-        storageClass: "longhorn" # Forces the use of Longhorn
-        size: 2Gi
+      primary:
+        persistence:
+          enabled: true
+          storageClass: "longhorn" # Forces the use of Longhorn
+          size: 2Gi
     ingress:
       enabled: true
       ingressClassName: nginx
