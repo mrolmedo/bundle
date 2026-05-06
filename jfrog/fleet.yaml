@@ -1,0 +1,58 @@
+defaultNamespace: jfrog-system
+name: jfrog-jcr-selfcontained
+namespace: jfrog-system
+
+# Part 1: Create the JFrog-specific Issuer
+# This replaces the 'rancher' issuer with a local 'jfrog-issuer'
+definitions:
+  - apiVersion: cert-manager.io/v1
+    kind: Issuer
+    metadata:
+      name: jfrog-issuer
+      namespace: jfrog-system
+    spec:
+      selfSigned: {}
+
+# Part 2: Deploy Artifactory JCR
+helm:
+  repo: https://charts.jfrog.io
+  chart: artifactory-jcr
+  version: 107.90.10
+  
+  values:
+    artifactory:
+      image:
+        repository: releases-docker.jfrog.io/jfrog/artifactory-jcr
+        tag: latest
+      externalPort: 443
+      externalProtocol: https
+      copyNGINXConfig: false
+
+    jfconnect:
+      enabled: false
+
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: "longhorn" # Forces the use of Longhorn
+        size: 20Gi
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        # Pointing to our new local issuer created above
+        cert-manager.io/issuer: jfrog-issuer
+        cert-manager.io/issuer-kind: Issuer
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      hosts:
+        - jfrogmolmedo.support.rancher.space
+      tls:
+        - secretName: jfrog-jcr-tls-cert
+          hosts:
+            - jfrogmolmedo.support.rancher.space
+
+  dependsON:
+    -  selector:
+       matchLabels:
+        app: longhorn
