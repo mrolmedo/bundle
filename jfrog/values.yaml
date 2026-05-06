@@ -56,8 +56,9 @@ ingress:
         - jfrogmolmedo.support.rancher.space
 
 # ----- Disable built-in Nginx (using Ingress instead) -----
-nginx:
-  enabled: false
+artifactory:
+  nginx:
+    enabled: false
 
 # ----- Service Configuration -----
 artifactory:
