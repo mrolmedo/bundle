@@ -31,15 +31,15 @@ helm:
         tag: latest
       
       # Bitnami PostgreSQL sub-chart overrides
-     postgresql:
-      enabled: true
-      persistence:
-        size: 5Gi
-      primary:
-        persistence:
-          enabled: true
-          storageClass: "longhorn"
-          size: 5Gi
+      postgresql:
+       enabled: true
+       persistence:
+         size: 5Gi
+       primary:
+         persistence:
+           enabled: true
+           storageClass: "longhorn"
+           size: 5Gi
 
       # Networking
       externalPort: 443
