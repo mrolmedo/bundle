@@ -23,48 +23,5 @@ helm:
   chart: artifactory-jcr
   version: 107.90.10
   
-  values:
-    # IMPORTANT: The JCR chart wraps everything in this 'artifactory' key
-    artifactory:
-      image:
-        repository: releases-docker.jfrog.io/jfrog/artifactory-jcr
-        tag: latest
-      nginx:
-        enabled: true
-        service:
-          type: ClusterIP
-      # Bitnami PostgreSQL sub-chart overrides
-      postgresql:
-       enabled: true
-       persistence:
-         size: 5Gi
-       primary:
-         persistence:
-           enabled: true
-           storageClass: "longhorn"
-           size: 5Gi
-
-      # Networking
-      externalPort: 443
-      externalProtocol: https
-      copyNGINXConfig: false
-
-    # JFrog Global settings
-    jfconnect:
-      enabled: false
-
-    # Ingress and Cert-Manager (using your custom issuer)
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/issuer: jfrog-issuer
-        cert-manager.io/issuer-kind: Issuer
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      hosts:
-        - jfrogmolmedo.support.rancher.space
-      tls:
-        - secretName: jfrog-jcr-tls-cert
-          hosts:
-            - jfrogmolmedo.support.rancher.space
+  
  
