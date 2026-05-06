@@ -36,7 +36,7 @@ helm:
       persistence:
         enabled: true
         storageClass: "longhorn" # Forces the use of Longhorn
-        size: 20Gi
+        size: 2Gi
     ingress:
       enabled: true
       ingressClassName: nginx
