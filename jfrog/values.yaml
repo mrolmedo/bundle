@@ -1,0 +1,72 @@
+# ----- Database Configuration -----
+postgresql:
+  enabled: true
+  postgresqlUsername: artifactory
+  postgresqlPassword: StrongDBPass2024
+  postgresqlDatabase: artifactory
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: "longhorn"
+
+# ----- Artifactory Core Settings -----
+artifactory:
+  database:
+    type: postgresql
+    driver: org.postgresql.Driver
+    url: "jdbc:postgresql://{{ .Release.Name }}-postgresql:5432/artifactory"
+    username: artifactory
+    password: StrongDBPass2024
+
+  # Resource allocation
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "1"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+
+  # Java options for the JVM
+  javaOpts:
+    xms: "1g"
+    xmx: "2g"
+
+  # Persistent storage for artifacts
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: "standard"
+    type: file-system
+
+# ----- Ingress Configuration -----
+ingress:
+  enabled: true
+  defaultBackend:
+    enabled: false
+  hosts:
+    - jfrogmolmedo.support.rancher.space
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: jfrog-issuer
+    cert-manager.io/issuer-kind: Issuer
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+  tls:
+    - secretName: artifactory-tls
+      hosts:
+        - jfrogmolmedo.support.rancher.space
+
+# ----- Disable built-in Nginx (using Ingress instead) -----
+nginx:
+  enabled: false
+
+# ----- Service Configuration -----
+artifactory:
+  service:
+    type: ClusterIP
+# --------------------------
+jfconnect:
+  enabled: false
+
