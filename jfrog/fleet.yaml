@@ -1,11 +1,11 @@
 # fleet.yaml
-  defaultNamespace: jfrog-system
-  name: jfrog-jcr-deployment
-  namespace: jfrog-system
-  dependsON:
-    - selector:
-        matchLabels:
-          app: longhorn
+defaultNamespace: jfrog-system
+name: jfrog-jcr-deployment
+namespace: jfrog-system
+dependsON:
+  - selector:
+      matchLabels:
+        app: longhorn
 
 # Part 1: Create the JFrog-specific Issuer
 definitions:
