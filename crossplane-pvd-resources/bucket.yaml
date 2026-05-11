@@ -1,4 +1,4 @@
-apiVersion: s3.aws.upbound.io/v1beta1
+apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: aws3-bucket-eucentral1
