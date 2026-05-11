@@ -1,5 +1,5 @@
 dependsOn:
   - selector:
       matchLabels:
-        fleet.cattle.io/repo-name: crossplane
+        app: crossplane-main
 defaultNamespace: crossplane-system
