@@ -1,0 +1,29 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-s3
+spec:
+  # Your specific requested version
+  package: xpkg.crossplane.io/crossplane-contrib/provider-aws-s3:v1.21.1
+---
+apiVersion: aws.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: aws3-bucket-eucentral1
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: aws-secret # This is the secret you create manually
+      key: creds
+---
+apiVersion: s3.aws.crossplane.io/v1beta1
+kind: Bucket
+metadata:
+  name: fleet-managed-bucket
+spec:
+  forProvider:
+    region: eu-central-1
+  providerConfigRef:
+    name: aws3-bucket-eucentral1
