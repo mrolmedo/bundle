@@ -1,0 +1,6 @@
+dependsOn:
+  - selector:
+      matchLabels:
+        app: crossplane
+
+defaultNamespace: crossplane-system
