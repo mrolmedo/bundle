@@ -1,4 +1,6 @@
 defaultNamespace: crossplane-system
+labels:
+  app: crossplane-main
 helm:
   releaseName: crossplane-main
 # Points Fleet to the official Helm repository
