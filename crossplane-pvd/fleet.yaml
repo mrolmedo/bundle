@@ -1,3 +1,5 @@
+labels:
+  app: crossplane-pvd
 dependsOn:
   - selector:
       matchLabels:
