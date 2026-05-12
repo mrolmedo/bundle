@@ -1,1 +1,6 @@
 defaultNamespace: crossplane-system
+dependsOn:
+  - selector:
+      matchLabels:
+        app: crossplane-pvd
+  
