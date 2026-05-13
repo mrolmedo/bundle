@@ -13,7 +13,7 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  name: fleet-managed-bucket-${ .ClusterName }
+  name: fleet-managed-bucket-${ get .ClusterLabels "management.cattle.io/cluster-display-name" }
   namespace: crossplane-system
 spec:
   forProvider:
