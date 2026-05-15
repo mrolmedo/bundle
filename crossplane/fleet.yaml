@@ -1,13 +1,4 @@
 defaultNamespace: crossplane-system
-labels:
-  app: crossplane-main
-helm:
-  releaseName: crossplane-main
-# Points Fleet to the official Helm repository
-  repo: https://charts.crossplane.io/stable
-  chart: crossplane
-# You can specify a version for the Crossplane Core here
-  version: 1.20.0
 
 
  
