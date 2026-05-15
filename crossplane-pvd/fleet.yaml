@@ -1,7 +1,0 @@
-labels:
-  app: crossplane-pvd
-dependsOn:
-  - selector:
-      matchLabels:
-        app: crossplane-main
-defaultNamespace: crossplane-system
