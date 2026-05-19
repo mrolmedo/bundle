@@ -1,0 +1,10 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: bucket-ds
+  namespace: crossplane-system
+spec:
+  forProvider:
+    region: eu-central-1
+  providerConfigRef:
+    name: aws3-bucket-eucentral1
