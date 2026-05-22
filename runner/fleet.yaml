@@ -1,0 +1,12 @@
+defaultNamespace: arc-runners # Change to your preferred namespace
+
+helm:
+  # Reference the official Helm chart via OCI
+  chart: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+  # It is best practice to pins a specific version
+  version: 0.14.1 
+  releaseName: arc-runner-set
+  
+  # Point Fleet to the values file in the same directory
+  valuesFiles:
+    - values.yaml
