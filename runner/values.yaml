@@ -5,7 +5,7 @@
 
 githubConfigUrl: "https://github.com/mrolmedo/bundle"
 
-githubConfigSecret: "arc-runner-set-token"
+githubConfigSecret: "arc-runner-predefined-secret"
 
 runnerScaleSetName: "arc-runner-set"
 minRunners: 1
