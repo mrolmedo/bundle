@@ -1,7 +1,7 @@
 ## Bypasses the cluster lookup failure in Fleet GitOps pipelines
-#controllerServiceAccount:
-#  name: gha-rs-controller
-#  namespace: arc-systems # Ensure this matches where your ARC manager/controller is installed
+controllerServiceAccount:
+  name: gha-rs-controller
+  namespace: arc-systems # Ensure this matches where your ARC manager/controller is installed
 
 githubConfigUrl: "https://github.com/mrolmedo/bundle"
 
