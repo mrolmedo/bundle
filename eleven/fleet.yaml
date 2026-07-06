@@ -1,0 +1,7 @@
+defaultNamespace: "eleven"
+
+targetCustomizations:
+- name: cluster-target
+  clusterSelector:
+    matchLabels:
+      management.cattle.io/cluster-display-name: rke2single2
