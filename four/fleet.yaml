@@ -1,0 +1,11 @@
+defaultNamespace: "four"
+
+helm:
+  chart: "this-chart-does-not-exist"
+  repo: "https://charts.helm.sh/stable"
+
+targetCustomizations:
+- name: cluster-target
+  clusterSelector:
+    matchLabels:
+      management.cattle.io/cluster-display-name: rke2single2
