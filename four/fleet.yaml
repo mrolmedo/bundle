@@ -1,9 +1,8 @@
 defaultNamespace: "four"
 
 helm:
-  chart: "this-chart-does-not-exist"
-  repo: "https://charts.helm.sh/stable"
-
+  chart: https://github.com/rancher/fleet-examples/releases/download/example/guestbook-0.0.1.tgz
+ 
 targetCustomizations:
 - name: cluster-target
   clusterSelector:
