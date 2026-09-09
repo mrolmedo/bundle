@@ -8,7 +8,7 @@ helm:
   releasename: metallb
   
 
-forceSyncGeneration: 3
+forceSyncGeneration: 4
 diff:
   comparePatches:
     - apiVersion: apiextensions.k8s.io/v1
