@@ -4,7 +4,7 @@ helm:
   chart: metallb
   repo: https://metallb.github.io/metallb
   version: 0.14.3
-
+  name: metallb
 forceSyncGeneration: 3
 diff:
   comparePatches:
