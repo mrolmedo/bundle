@@ -1,4 +1,6 @@
 defaultNamespace: metallb
+labels:
+  app: metallb
 
 helm:
   chart: metallb
