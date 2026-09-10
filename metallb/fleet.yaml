@@ -1,5 +1,6 @@
 defaultNamespace: metallb
-
+labels:
+  key: metallb
 helm:
   chart: metallb
   repo: https://metallb.github.io/metallb
