@@ -1,7 +1,5 @@
 defaultNamespace: metallb
-labels:
-  key: metallb
-  label: gitrepofleet
+
 helm:
   chart: metallb
   repo: https://metallb.github.io/metallb
