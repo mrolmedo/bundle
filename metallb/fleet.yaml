@@ -5,6 +5,7 @@ helm:
   version: 0.14.3
   name: metallb
   releaseName: metallb
+  force: true
 
 diff:
   comparePatches:
