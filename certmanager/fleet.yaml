@@ -1,0 +1,9 @@
+defaultNamespace: cert-manager
+helm:
+  repo: https://charts.jetstack.io
+  chart: cert-manager
+  version: v1.15.3  # Or any cert-manager v1.15+ / v1.16+ version
+  releaseName: cert-manager
+  # Automatically creates CustomResourceDefinitions (CRDs)
+  values:
+    installCRDs: true
