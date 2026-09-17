@@ -1,4 +1,5 @@
 defaultNamespace: metallb
+forceSyncGeneration: 13
 helm:
   chart: metallb
   repo: https://metallb.github.io/metallb
